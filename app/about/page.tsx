@@ -29,8 +29,7 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 py-4 sm:py-6">
       <section className="quest-card p-5 sm:p-8">
-        <span className="quest-chip">About</span>
-        <h1 className="mt-4 text-3xl font-black leading-tight text-slate-950 sm:text-4xl">
+        <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-4xl">
           ラブクエ診断とは？
         </h1>
         <p className="mt-4 leading-8 text-slate-600">

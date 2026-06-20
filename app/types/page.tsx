@@ -7,7 +7,7 @@ import { resultList } from "@/data/results";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "冒険者ギルド 役職図鑑",
+  title: "16タイプ 役職図鑑",
   description: "ラブクエ診断に登場する16タイプの恋愛ジョブを一覧で確認できます。",
   path: "/types"
 });
@@ -15,9 +15,8 @@ export const metadata: Metadata = createPageMetadata({
 export default function TypesPage() {
   return (
     <div className="wide-shell space-y-6 py-4 sm:py-6">
-      <SectionCard className="mx-auto max-w-2xl p-4 sm:p-8" label="GUILD LIBRARY">
-        <span className="quest-chip">🧭 ギルド図鑑</span>
-        <h1 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">冒険者ギルド 役職図鑑</h1>
+      <SectionCard className="mx-auto max-w-2xl p-4 sm:p-8">
+        <h1 className="text-3xl font-black text-slate-950 sm:text-4xl">16タイプ 役職図鑑</h1>
         <p className="mt-4 max-w-3xl leading-8 text-slate-600">
           ラブクエ診断に登場する16の恋愛ジョブをまとめました。診断後の深掘りや、友だちの結果を読むときにも使えます。
         </p>

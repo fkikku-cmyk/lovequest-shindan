@@ -161,10 +161,7 @@ export default function ResultCard({ result }: ResultCardProps) {
     <SectionCard className="mx-auto w-full max-w-2xl overflow-hidden">
       <div className="grid gap-0">
         <div className="bg-gradient-to-br from-pink-50 via-white to-violet-50 p-4 sm:p-8">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="quest-chip">あなたの恋愛ジョブは...</p>
-            <span className="rpg-label">YOUR LOVE JOB</span>
-          </div>
+          <p className="text-center text-sm font-black text-ruby">あなたの恋愛ジョブは...</p>
           <div className="magic-border relative mx-auto mt-4 flex aspect-square w-full max-w-[430px] items-center justify-center overflow-hidden rounded-[2rem] bg-white">
             {!imageFailed ? (
               <Image
@@ -191,22 +188,19 @@ export default function ResultCard({ result }: ResultCardProps) {
 
         <div className="space-y-5 p-4 sm:p-8">
           <div>
-            <h2 className="text-sm font-black text-slate-500">📜 冒険の書：恋愛傾向</h2>
+            <h2 className="text-sm font-black text-slate-500">恋愛傾向</h2>
             <p className="mt-3 leading-8 text-slate-700">{result.description}</p>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <InfoList label="SKILL" title="⚔️ 強み" items={result.strengths} tone="sky" />
-            <InfoList label="BALANCE" title="🛡️ 弱み" items={result.weaknesses} tone="rose" />
+            <InfoList title="強み" items={result.strengths} tone="sky" />
+            <InfoList title="気をつけたいこと" items={result.weaknesses} tone="rose" />
           </div>
 
-          <StatsStars stats={result.stats} title="✨ 恋愛ステータス" />
+          <StatsStars stats={result.stats} title="恋愛ステータス" />
 
           <div className="status-panel p-5">
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="text-sm font-black text-slate-500">🛡️ おすすめパーティ</h2>
-              <span className="rpg-label">PARTY</span>
-            </div>
+            <h2 className="text-sm font-black text-slate-500">相性の良いタイプ</h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {result.compatible.map((code) => (
                 <Link
@@ -320,12 +314,10 @@ function downloadDataUrl(dataUrl: string, filename: string) {
 }
 
 function InfoList({
-  label,
   title,
   items,
   tone
 }: {
-  label: string;
   title: string;
   items: string[];
   tone: "sky" | "rose";
@@ -333,7 +325,7 @@ function InfoList({
   const color = tone === "sky" ? "text-sky-600 bg-sky-50" : "text-rose-600 bg-rose-50";
 
   return (
-    <SectionCard as="div" tone="plain" className="p-5" label={label}>
+    <SectionCard as="div" tone="plain" className="p-5">
       <h2 className={`inline-flex rounded-full px-3 py-1 text-xs font-black ${color}`}>{title}</h2>
       <ul className="mt-4 space-y-2">
         {items.map((item) => (

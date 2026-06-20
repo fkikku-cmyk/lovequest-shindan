@@ -94,7 +94,7 @@ export default function QuizPage() {
     return (
       <div className="mx-auto grid min-h-[60vh] max-w-3xl place-items-center">
         <div className="quest-card p-8 text-center text-sm font-bold text-slate-600">
-          冒険の書を読み込み中...
+          読み込み中...
         </div>
       </div>
     );

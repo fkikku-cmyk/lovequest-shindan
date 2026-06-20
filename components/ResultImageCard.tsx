@@ -49,20 +49,6 @@ const ResultImageCard = forwardRef<HTMLDivElement, ResultImageCardProps>(
                 border: "3px solid #ffe1eb"
               }}
             />
-            <div
-              style={{
-                borderRadius: 999,
-                background: "#fff1f6",
-                border: "3px solid #ff8db3",
-                color: "#7c3aed",
-                fontSize: 30,
-                fontWeight: 900,
-                letterSpacing: 2,
-                padding: "16px 28px"
-              }}
-            >
-              YOUR LOVE JOB
-            </div>
           </div>
 
           <div

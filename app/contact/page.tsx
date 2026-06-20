@@ -14,8 +14,7 @@ export default function ContactPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 py-4 sm:py-6">
       <section className="quest-card p-5 sm:p-8">
-        <span className="quest-chip">Contact</span>
-        <h1 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">お問い合わせ</h1>
+        <h1 className="text-3xl font-black text-slate-950 sm:text-4xl">お問い合わせ</h1>
         <p className="mt-4 leading-8 text-slate-600">
           ラブクエ診断へのご意見、不具合のご報告、広告掲載に関するご相談などはこちらのページをご確認ください。
         </p>

@@ -93,7 +93,6 @@ export default function TypeDetailPage({ params }: TypePageProps) {
               <Link href="/types" className="text-sm font-bold text-ruby hover:underline">
                 役職図鑑へ戻る
               </Link>
-              <span className="rpg-label">GUILD CARD</span>
             </div>
             <div className="magic-border relative mx-auto mt-5 aspect-square w-full max-w-[430px] overflow-hidden rounded-[2rem] bg-white">
               <Image
@@ -112,28 +111,28 @@ export default function TypeDetailPage({ params }: TypePageProps) {
             <h1 className="text-3xl font-black text-slate-950 sm:text-5xl">{result.name}</h1>
             <p className="text-lg font-bold leading-8 text-slate-700">{result.catch}</p>
 
-            <SectionCard tone="pink" className="p-5" label="ADVENTURE LOG">
-              <h2 className="text-sm font-black text-ruby">📜 冒険の書：恋愛傾向</h2>
+            <SectionCard tone="pink" className="p-5">
+              <h2 className="text-sm font-black text-ruby">恋愛傾向</h2>
               <p className="mt-3 leading-8 text-slate-700">{result.description}</p>
               <p className="mt-3 leading-8 text-slate-600">{supplement.detail}</p>
             </SectionCard>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <InfoBlock label="SKILL" title="⚔️ 強み" items={result.strengths} />
-              <InfoBlock label="BALANCE" title="🛡️ 気をつけたいこと" items={result.weaknesses} />
+              <InfoBlock title="強み" items={result.strengths} />
+              <InfoBlock title="気をつけたいこと" items={result.weaknesses} />
             </div>
 
-            <StatsStars stats={result.stats} title="✨ 恋愛ステータス" />
+            <StatsStars stats={result.stats} title="恋愛ステータス" />
 
-            <InfoBlock label="ACTION LOG" title="🧭 このタイプっぽい恋愛行動" items={supplement.behaviors} />
+            <InfoBlock title="このタイプっぽい恋愛行動" items={supplement.behaviors} />
 
-            <SectionCard tone="amber" className="p-5" label="QUEST TIP">
-              <h2 className="text-sm font-black text-amber-600">✨ このタイプへのアドバイス</h2>
+            <SectionCard tone="amber" className="p-5">
+              <h2 className="text-sm font-black text-amber-600">このタイプへのアドバイス</h2>
               <p className="mt-3 leading-8 text-slate-700">{supplement.advice}</p>
             </SectionCard>
 
-            <SectionCard as="div" tone="plain" className="p-5" label="PARTY">
-              <h2 className="text-sm font-black text-slate-500">🛡️ 相性の良いおすすめパーティ</h2>
+            <SectionCard as="div" tone="plain" className="p-5">
+              <h2 className="text-sm font-black text-slate-500">相性の良いタイプ</h2>
               <div className="mt-4 grid gap-3">
                 {result.compatible.map((code) => (
                   <Link
@@ -166,9 +165,9 @@ export default function TypeDetailPage({ params }: TypePageProps) {
   );
 }
 
-function InfoBlock({ label, title, items }: { label?: string; title: string; items: string[] }) {
+function InfoBlock({ title, items }: { title: string; items: string[] }) {
   return (
-    <SectionCard as="div" tone="plain" className="p-5" label={label}>
+    <SectionCard as="div" tone="plain" className="p-5">
       <h2 className="text-sm font-black text-slate-500">{title}</h2>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (

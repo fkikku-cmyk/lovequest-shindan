@@ -20,11 +20,7 @@ function stars(value: number) {
 export default function StatsStars({ stats, title = "RPGステータス", className = "" }: StatsStarsProps) {
   return (
     <div className={["status-panel p-5", className].join(" ")}>
-      <div className="flex items-center justify-between gap-3">
-        <span className="rpg-label">STATUS</span>
-        <span className="text-xs font-black text-amber-500">ABILITY</span>
-      </div>
-      <h2 className="mt-3 text-lg font-black text-slate-950">{title}</h2>
+      <h2 className="text-lg font-black text-slate-950">{title}</h2>
       <div className="mt-4 grid gap-3">
         {(Object.entries(stats) as [keyof ResultStats, number][]).map(([key, value]) => (
           <div key={key} className="grid grid-cols-[4rem_1fr_2rem] items-center gap-3 rounded-2xl bg-white/78 px-3 py-2 ring-1 ring-amber-100/80">

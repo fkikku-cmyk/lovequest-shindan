@@ -19,18 +19,12 @@ export default function SectionCard<T extends ElementType = "section">({
   as,
   children,
   className = "",
-  label,
   tone = "default"
 }: SectionCardProps<T>) {
   const Component = as || "section";
 
   return (
     <Component className={[toneStyles[tone], className].join(" ")}>
-      {label ? (
-        <div className="mb-4">
-          <span className="rpg-label">{label}</span>
-        </div>
-      ) : null}
       {children}
     </Component>
   );

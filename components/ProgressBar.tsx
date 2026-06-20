@@ -10,10 +10,9 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
     <div className="space-y-2">
       <div className="flex items-center justify-between text-xs font-bold text-slate-500 sm:text-sm">
         <span className="inline-flex items-center gap-2">
-          <span className="rpg-label !px-2 !py-1">QUEST</span>
           Question {current} / {total}
         </span>
-        <span>EXP {Math.round(percentage)}%</span>
+        <span>{Math.round(percentage)}%</span>
       </div>
       <div className="h-4 overflow-hidden rounded-full bg-white p-1 shadow-inner ring-1 ring-pink-100">
         <div

@@ -36,8 +36,7 @@ export default function DisclaimerPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 py-4 sm:py-6">
       <section className="quest-card p-5 sm:p-8">
-        <span className="quest-chip">DISCLAIMER</span>
-        <h1 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">免責事項</h1>
+        <h1 className="text-3xl font-black text-slate-950 sm:text-4xl">免責事項</h1>
         <p className="mt-4 leading-8 text-slate-600">
           ラブクエ診断を公開サイトとして運営するため、診断結果や掲載情報の位置づけを明確にしています。
         </p>

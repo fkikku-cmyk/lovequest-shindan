@@ -39,10 +39,9 @@ const popularTypes = [results.PLAE, results.CRAE, results.CRIE, results.CRIM];
 export default function Home() {
   return (
     <div className="mx-auto max-w-md space-y-8 pb-4 md:max-w-2xl">
-      <SectionCard className="overflow-hidden p-4 sm:p-7" label="QUEST">
+      <SectionCard className="overflow-hidden p-4 sm:p-7">
         <div className="space-y-5">
           <div>
-            <span className="quest-chip">⚔️ 無料恋愛ジョブ診断</span>
             <h1 className="sr-only">ラブクエ診断</h1>
             <div className="mt-4 overflow-hidden rounded-3xl bg-[#f8d3c4] ring-1 ring-pink-100">
               <Image
@@ -80,15 +79,14 @@ export default function Home() {
 
       <section className="space-y-4">
         <div>
-          <span className="quest-chip">📜 冒険の書</span>
-          <h2 className="mt-3 text-2xl font-black text-slate-950">診断クエストでわかること</h2>
+          <h2 className="text-2xl font-black text-slate-950">診断でわかること</h2>
           <p className="mt-2 leading-7 text-slate-600">
             恋愛のクセを、かわいい現代RPG風のジョブとして楽しく整理します。
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           {features.map((feature) => (
-            <SectionCard key={feature.title} as="article" className="p-4 sm:p-5" label="BALANCE">
+            <SectionCard key={feature.title} as="article" className="p-4 sm:p-5">
               <h3 className="text-lg font-black text-slate-950">{feature.title}</h3>
               <p className="mt-2 text-sm leading-7 text-slate-600">{feature.text}</p>
             </SectionCard>
@@ -99,8 +97,7 @@ export default function Home() {
       <section className="space-y-4">
         <div className="flex items-end justify-between gap-3">
           <div>
-            <span className="quest-chip">🧭 ギルド図鑑</span>
-            <h2 className="mt-3 text-2xl font-black text-slate-950">人気ジョブ紹介</h2>
+            <h2 className="text-2xl font-black text-slate-950">人気ジョブ紹介</h2>
           </div>
           <Link href="/types" className="hidden text-sm font-black text-ruby hover:underline sm:inline">
             役職図鑑を見る
@@ -120,9 +117,8 @@ export default function Home() {
 
       <AdSlot position="top" />
 
-      <SectionCard className="bg-gradient-to-br from-white via-pink-50 to-violet-50 p-5 text-center sm:p-8" label="START QUEST">
-        <span className="quest-chip">✨ 診断クエスト</span>
-        <h2 className="mt-4 text-2xl font-black leading-tight text-slate-950 sm:text-3xl">
+      <SectionCard className="bg-gradient-to-br from-white via-pink-50 to-violet-50 p-5 text-center sm:p-8">
+        <h2 className="text-2xl font-black leading-tight text-slate-950 sm:text-3xl">
           あなたの恋愛ジョブを調べよう
         </h2>
         <p className="mt-3 leading-8 text-slate-600">

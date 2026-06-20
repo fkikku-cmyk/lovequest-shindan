@@ -162,35 +162,6 @@ select {
     z-index: 1;
   }
 
-  .quest-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    border: 1px solid rgba(255, 79, 123, 0.22);
-    border-radius: 999px;
-    background: rgba(255, 239, 244, 0.86);
-    color: #b91c4d;
-    font-size: 0.78rem;
-    font-weight: 700;
-    line-height: 1;
-    padding: 0.52rem 0.72rem;
-  }
-
-  .rpg-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 107, 154, 0.16);
-    background: linear-gradient(90deg, rgba(255, 107, 154, 0.14), rgba(124, 92, 255, 0.12));
-    color: #7c2d8f;
-    font-size: 0.7rem;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-    line-height: 1;
-    padding: 0.42rem 0.64rem;
-  }
-
   .status-panel {
     position: relative;
     overflow: hidden;

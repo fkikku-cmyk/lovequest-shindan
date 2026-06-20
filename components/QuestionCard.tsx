@@ -37,8 +37,8 @@ export default function QuestionCard({
         <ProgressBar current={currentIndex + 1} total={total} />
 
         <div className="rounded-3xl bg-gradient-to-br from-white to-pink-50 p-4 ring-1 ring-pink-100 sm:p-6">
-          <p className="quest-chip">
-            恋のクエスト #{String(question.id).padStart(2, "0")}
+          <p className="text-sm font-black text-ruby">
+            Question {currentIndex + 1} / {total}
           </p>
           <h1 className="mt-4 text-xl font-black leading-relaxed text-slate-900">
             {question.text}
@@ -47,8 +47,8 @@ export default function QuestionCard({
 
         <div className="grid gap-3">
           <div className="flex items-center justify-between px-1 text-xs font-black text-slate-400">
-            <span>COMMAND SELECT</span>
-            <span>5段階で選択</span>
+            <span>あてはまるものを選んでください</span>
+            <span>5段階</span>
           </div>
           {choices.map((choice) => {
             const active = selected === choice.value;

@@ -31,8 +31,7 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6 py-4 sm:py-6">
       <section className="quest-card p-5 sm:p-8">
-        <span className="quest-chip">Privacy</span>
-        <h1 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">プライバシーポリシー</h1>
+        <h1 className="text-3xl font-black text-slate-950 sm:text-4xl">プライバシーポリシー</h1>
         <p className="mt-4 leading-8 text-slate-600">
           ラブクエ診断をご利用いただく際の情報の取り扱いについて説明します。
         </p>
