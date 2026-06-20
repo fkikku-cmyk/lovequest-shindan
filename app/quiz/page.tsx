@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import AdSlot from "@/components/AdSlot";
-import PixelButton from "@/components/PixelButton";
 import QuestionCard from "@/components/QuestionCard";
 import { questions } from "@/data/questions";
 import { diagnose, isAnswerValue, type AnswerValue, type Answers } from "@/lib/diagnose";
@@ -42,7 +40,6 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<Partial<Answers>>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hydrated, setHydrated] = useState(false);
-  const [showAdBreak, setShowAdBreak] = useState(false);
 
   useEffect(() => {
     const savedAnswers = loadAnswers();
@@ -71,11 +68,6 @@ export default function QuizPage() {
     setAnswers(nextAnswers);
 
     window.setTimeout(() => {
-      if (currentIndex === 11) {
-        setShowAdBreak(true);
-        return;
-      }
-
       if (currentIndex < questions.length - 1) {
         setCurrentIndex((index) => index + 1);
         return;
@@ -87,13 +79,7 @@ export default function QuizPage() {
   };
 
   const handleBack = () => {
-    setShowAdBreak(false);
     setCurrentIndex((index) => Math.max(0, index - 1));
-  };
-
-  const handleContinueFromAdBreak = () => {
-    setShowAdBreak(false);
-    setCurrentIndex(12);
   };
 
   useEffect(() => {
@@ -110,37 +96,6 @@ export default function QuizPage() {
         <div className="quest-card p-8 text-center text-sm font-bold text-slate-600">
           冒険の書を読み込み中...
         </div>
-      </div>
-    );
-  }
-
-  if (showAdBreak) {
-    return (
-      <div className="mx-auto flex min-h-[calc(100vh-96px)] max-w-md items-start py-4 sm:items-center sm:py-6">
-        <section className="quest-card w-full p-4 sm:p-6">
-          <div className="space-y-5">
-            <div>
-              <span className="quest-chip">前半クリア</span>
-              <h1 className="mt-4 text-2xl font-black leading-relaxed text-slate-950">
-                ここで小休憩。
-                <br />
-                後半の冒険へ進みましょう
-              </h1>
-              <p className="mt-3 leading-7 text-slate-600">
-                12問まで回答しました。診断体験を邪魔しないよう、広告や関連記事はこのような区切りにだけ表示します。
-              </p>
-            </div>
-            <AdSlot position="middle" />
-            <div className="grid gap-3">
-              <PixelButton onClick={handleContinueFromAdBreak} className="w-full">
-                後半へ進む
-              </PixelButton>
-              <PixelButton onClick={handleBack} variant="secondary" className="w-full">
-                1問戻る
-              </PixelButton>
-            </div>
-          </div>
-        </section>
       </div>
     );
   }

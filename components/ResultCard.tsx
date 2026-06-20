@@ -15,6 +15,31 @@ type ResultCardProps = {
 
 const DEFAULT_OG_IMAGE = "/ogp/default-ogp.png";
 
+function getCurrentShareUrl(code: string) {
+  if (typeof window === "undefined") {
+    return `/result/${code}`;
+  }
+
+  return window.location.href;
+}
+
+function buildXShareUrl(text: string, url: string) {
+  const params = new URLSearchParams({
+    text,
+    url
+  });
+
+  return `https://twitter.com/intent/tweet?${params.toString()}`;
+}
+
+function buildThreadsShareUrl(text: string, url: string) {
+  const params = new URLSearchParams({
+    text: `${text}\n${url}`
+  });
+
+  return `https://www.threads.net/intent/post?${params.toString()}`;
+}
+
 export default function ResultCard({ result }: ResultCardProps) {
   const [copied, setCopied] = useState(false);
   const [imageShared, setImageShared] = useState(false);
@@ -25,33 +50,56 @@ export default function ResultCard({ result }: ResultCardProps) {
   const saveCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setShareUrl(`${window.location.origin}/result/${result.code}`);
+    setShareUrl(window.location.href);
   }, [result.code]);
 
-  const shareText = `私の恋愛ジョブは『${result.name}』でした⚔️\nあなたもラブクエ診断で恋のタイプを診断してみよう！\n#ラブクエ診断`;
-  const encodedText = encodeURIComponent(shareText);
-  const encodedUrl = encodeURIComponent(shareUrl);
-  const xUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-  const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(
-    `${shareText}\n${shareUrl}`
-  )}`;
+  const shareText = `私の恋愛ジョブは『${result.name}』でした⚔️💘\nあなたもラブクエ診断で恋のタイプを診断してみよう！\n#ラブクエ診断`;
   const ogImagePath = result.ogImage ?? DEFAULT_OG_IMAGE;
   const shareTitle = `${result.name}（${result.code}）｜ラブクエ診断`;
 
   const handleCopy = async () => {
     if (typeof navigator === "undefined") return;
-    await navigator.clipboard.writeText(shareUrl);
+    const currentShareUrl = getCurrentShareUrl(result.code);
+    setShareUrl(currentShareUrl);
+    await navigator.clipboard.writeText(currentShareUrl);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
+  };
+
+  const handleXShare = () => {
+    if (typeof window === "undefined") return;
+
+    const currentShareUrl = getCurrentShareUrl(result.code);
+    setShareUrl(currentShareUrl);
+    window.open(
+      buildXShareUrl(shareText, currentShareUrl),
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const handleThreadsShare = () => {
+    if (typeof window === "undefined") return;
+
+    const currentShareUrl = getCurrentShareUrl(result.code);
+    setShareUrl(currentShareUrl);
+    window.open(
+      buildThreadsShareUrl(shareText, currentShareUrl),
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   const handleImageShare = async () => {
     if (typeof window === "undefined" || typeof navigator === "undefined") return;
 
+    const currentShareUrl = getCurrentShareUrl(result.code);
+    setShareUrl(currentShareUrl);
+
     const shareData = {
       title: shareTitle,
       text: shareText,
-      url: shareUrl
+      url: currentShareUrl
     };
 
     try {
@@ -70,18 +118,18 @@ export default function ResultCard({ result }: ResultCardProps) {
       }
 
       await downloadOgImage(ogImagePath, result.code);
-      await navigator.clipboard?.writeText(shareUrl);
+      await navigator.clipboard?.writeText(currentShareUrl);
       setImageShared(true);
       window.setTimeout(() => setImageShared(false), 1800);
     } catch (error) {
       if ((error as DOMException).name === "AbortError") return;
 
       try {
-        await navigator.clipboard?.writeText(shareUrl);
+        await navigator.clipboard?.writeText(currentShareUrl);
         setCopied(true);
         window.setTimeout(() => setCopied(false), 1800);
       } catch {
-        window.open(shareUrl, "_blank", "noopener,noreferrer");
+        window.open(currentShareUrl, "_blank", "noopener,noreferrer");
       }
     }
   };
@@ -190,10 +238,10 @@ export default function ResultCard({ result }: ResultCardProps) {
           </p>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <PixelButton href={xUrl} variant="secondary" className="w-full">
-              Xで共有
+            <PixelButton onClick={handleXShare} variant="secondary" className="w-full">
+              Xで結果を共有
             </PixelButton>
-            <PixelButton href={threadsUrl} variant="secondary" className="w-full">
+            <PixelButton onClick={handleThreadsShare} variant="secondary" className="w-full">
               Threads
             </PixelButton>
             <PixelButton onClick={handleCopy} variant="secondary" className="w-full">
