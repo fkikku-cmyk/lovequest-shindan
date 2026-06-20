@@ -7,13 +7,44 @@ export const siteConfig = {
   defaultOgImage: "/ogp/default-ogp.png"
 };
 
+const blockedTemplateHost = `${["next", "js", "react", "typescript", "tailwind", "css"].join("-")}.vercel.app`;
+
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
+  const configuredUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
+  if (configuredUrl) {
+    return configuredUrl;
+  }
+
+  const vercelUrl = normalizeSiteUrl(process.env.VERCEL_URL);
+  if (vercelUrl) {
+    return vercelUrl;
+  }
+
+  return "http://127.0.0.1:3000";
 }
 
 export function absoluteUrl(path = "/") {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${getSiteUrl()}${normalizedPath}`;
+}
+
+function normalizeSiteUrl(value?: string) {
+  if (!value) {
+    return null;
+  }
+
+  const withProtocol = value.startsWith("http://") || value.startsWith("https://") ? value : `https://${value}`;
+
+  try {
+    const url = new URL(withProtocol);
+    if (url.hostname === blockedTemplateHost) {
+      return null;
+    }
+
+    return url.origin.replace(/\/$/, "");
+  } catch {
+    return null;
+  }
 }
 
 type PageMetadataOptions = {

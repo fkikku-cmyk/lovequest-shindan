@@ -6,7 +6,7 @@ import AdSlot from "@/components/AdSlot";
 import PixelButton from "@/components/PixelButton";
 import SectionCard from "@/components/SectionCard";
 import StatsStars from "@/components/StatsStars";
-import { resultSupplements, results } from "@/data/results";
+import { getCompatibilityReason, resultSupplements, results } from "@/data/results";
 import type { TypeCode } from "@/lib/diagnose";
 import { resolveOgImage } from "@/lib/ogp";
 
@@ -109,7 +109,6 @@ export default function TypeDetailPage({ params }: TypePageProps) {
           </div>
 
           <div className="space-y-5 p-4 sm:p-8">
-            <span className="quest-chip">TYPE CODE {result.code}</span>
             <h1 className="text-3xl font-black text-slate-950 sm:text-5xl">{result.name}</h1>
             <p className="text-lg font-bold leading-8 text-slate-700">{result.catch}</p>
 
@@ -135,14 +134,20 @@ export default function TypeDetailPage({ params }: TypePageProps) {
 
             <SectionCard as="div" tone="plain" className="p-5" label="PARTY">
               <h2 className="text-sm font-black text-slate-500">🛡️ 相性の良いおすすめパーティ</h2>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <div className="mt-4 grid gap-3">
                 {result.compatible.map((code) => (
                   <Link
                     key={code}
                     href={`/types/${code}`}
-                    className="rounded-full bg-pink-50 px-4 py-2 text-sm font-bold text-ruby transition hover:bg-pink-100"
+                    className="rounded-2xl bg-pink-50 px-4 py-3 transition hover:bg-pink-100"
                   >
-                    {results[code].name} / {code}
+                    <span className="block text-sm font-black text-ruby">{results[code].name}</span>
+                    <span className="mt-2 block text-[0.68rem] font-black tracking-[0.12em] text-violet-500">
+                      なぜ相性がいい？
+                    </span>
+                    <span className="mt-1 block text-xs font-bold leading-6 text-slate-600">
+                      {getCompatibilityReason(result.code, code)}
+                    </span>
                   </Link>
                 ))}
               </div>

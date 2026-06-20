@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import PixelButton from "@/components/PixelButton";
 import ResultImageCard from "@/components/ResultImageCard";
 import SectionCard from "@/components/SectionCard";
 import StatsStars from "@/components/StatsStars";
-import { results, type DiagnosisResult } from "@/data/results";
+import { getCompatibilityReason, results, type DiagnosisResult } from "@/data/results";
 
 type ResultCardProps = {
   result: DiagnosisResult;
@@ -46,21 +46,15 @@ export default function ResultCard({ result }: ResultCardProps) {
   const [cardSaved, setCardSaved] = useState(false);
   const [cardSaving, setCardSaving] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
-  const [shareUrl, setShareUrl] = useState(`/result/${result.code}`);
   const saveCardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setShareUrl(window.location.href);
-  }, [result.code]);
 
   const shareText = `私の恋愛ジョブは『${result.name}』でした⚔️💘\nあなたもラブクエ診断で恋のタイプを診断してみよう！\n#ラブクエ診断`;
   const ogImagePath = result.ogImage ?? DEFAULT_OG_IMAGE;
-  const shareTitle = `${result.name}（${result.code}）｜ラブクエ診断`;
+  const shareTitle = `${result.name}｜ラブクエ診断`;
 
   const handleCopy = async () => {
     if (typeof navigator === "undefined") return;
     const currentShareUrl = getCurrentShareUrl(result.code);
-    setShareUrl(currentShareUrl);
     await navigator.clipboard.writeText(currentShareUrl);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
@@ -70,7 +64,6 @@ export default function ResultCard({ result }: ResultCardProps) {
     if (typeof window === "undefined") return;
 
     const currentShareUrl = getCurrentShareUrl(result.code);
-    setShareUrl(currentShareUrl);
     window.open(
       buildXShareUrl(shareText, currentShareUrl),
       "_blank",
@@ -82,7 +75,6 @@ export default function ResultCard({ result }: ResultCardProps) {
     if (typeof window === "undefined") return;
 
     const currentShareUrl = getCurrentShareUrl(result.code);
-    setShareUrl(currentShareUrl);
     window.open(
       buildThreadsShareUrl(shareText, currentShareUrl),
       "_blank",
@@ -94,7 +86,6 @@ export default function ResultCard({ result }: ResultCardProps) {
     if (typeof window === "undefined" || typeof navigator === "undefined") return;
 
     const currentShareUrl = getCurrentShareUrl(result.code);
-    setShareUrl(currentShareUrl);
 
     const shareData = {
       title: shareTitle,
@@ -191,11 +182,7 @@ export default function ResultCard({ result }: ResultCardProps) {
             )}
           </div>
           <div className="mt-6 text-center">
-            <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-ruby ring-1 ring-pink-100">
-              <span className="text-[0.68rem] tracking-wide text-slate-400">TYPE CODE</span>
-              {result.code}
-            </p>
-            <h1 className="mt-1 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
+            <h1 className="text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
               {result.name}
             </h1>
             <p className="mt-3 text-base font-bold leading-8 text-slate-700">{result.catch}</p>
@@ -225,9 +212,15 @@ export default function ResultCard({ result }: ResultCardProps) {
                 <Link
                   key={code}
                   href={`/types/${code}`}
-                  className="rounded-full bg-pink-50 px-4 py-2 text-sm font-bold text-ruby transition hover:bg-pink-100"
+                  className="block w-full rounded-2xl bg-pink-50 px-4 py-3 text-left transition hover:bg-pink-100"
                 >
-                  {results[code].name} / {code}
+                  <span className="block text-sm font-black text-ruby">{results[code].name}</span>
+                  <span className="mt-2 block text-[0.68rem] font-black tracking-[0.12em] text-violet-500">
+                    なぜ相性がいい？
+                  </span>
+                  <span className="mt-1 block text-xs font-bold leading-6 text-slate-600">
+                    {getCompatibilityReason(result.code, code)}
+                  </span>
                 </Link>
               ))}
             </div>
@@ -266,7 +259,7 @@ export default function ResultCard({ result }: ResultCardProps) {
         </div>
       </div>
       <div className="pointer-events-none fixed left-[-9999px] top-0" aria-hidden="true">
-        <ResultImageCard ref={saveCardRef} result={result} shareUrl={shareUrl} />
+        <ResultImageCard ref={saveCardRef} result={result} />
       </div>
     </SectionCard>
   );

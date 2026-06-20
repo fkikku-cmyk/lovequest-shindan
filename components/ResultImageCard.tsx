@@ -5,11 +5,10 @@ import type { DiagnosisResult } from "@/data/results";
 
 type ResultImageCardProps = {
   result: DiagnosisResult;
-  shareUrl: string;
 };
 
 const ResultImageCard = forwardRef<HTMLDivElement, ResultImageCardProps>(
-  function ResultImageCard({ result, shareUrl }, ref) {
+  function ResultImageCard({ result }, ref) {
     return (
       <div
         ref={ref}
@@ -100,25 +99,9 @@ const ResultImageCard = forwardRef<HTMLDivElement, ResultImageCardProps>(
           </div>
 
           <div style={{ marginTop: 42, textAlign: "center" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 18,
-                borderRadius: 999,
-                background: "#fff1f6",
-                padding: "16px 30px",
-                color: "#ff4f7b",
-                fontSize: 34,
-                fontWeight: 900
-              }}
-            >
-              <span style={{ color: "#777789", fontSize: 20, letterSpacing: 2 }}>TYPE CODE</span>
-              {result.code}
-            </div>
             <h1
               style={{
-                margin: "22px 0 0",
+                margin: 0,
                 fontSize: 76,
                 lineHeight: 1.12,
                 fontWeight: 900,
@@ -155,7 +138,7 @@ const ResultImageCard = forwardRef<HTMLDivElement, ResultImageCardProps>(
             }}
           >
             <span>#ラブクエ診断</span>
-            <span>{formatShareUrl(shareUrl)}</span>
+            <span>ラブクエ診断</span>
           </div>
         </div>
       </div>
@@ -215,13 +198,4 @@ function Decorations() {
       </span>
     </>
   );
-}
-
-function formatShareUrl(shareUrl: string) {
-  try {
-    const url = new URL(shareUrl);
-    return `${url.host}${url.pathname}`;
-  } catch {
-    return shareUrl;
-  }
 }

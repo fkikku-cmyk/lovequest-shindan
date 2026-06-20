@@ -5,7 +5,7 @@ import AdSlot from "@/components/AdSlot";
 import PixelButton from "@/components/PixelButton";
 import SectionCard from "@/components/SectionCard";
 import TypeCard from "@/components/TypeCard";
-import { resultList, results } from "@/data/results";
+import { results } from "@/data/results";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -35,10 +35,6 @@ const features = [
 ];
 
 const popularTypes = [results.PLAE, results.CRAE, results.CRIE, results.CRIM];
-
-function getJobNo(code: string) {
-  return resultList.findIndex((result) => result.code === code) + 1;
-}
 
 export default function Home() {
   return (
@@ -113,7 +109,7 @@ export default function Home() {
 
         <div className="grid grid-cols-2 gap-3">
           {popularTypes.map((result) => (
-            <TypeCard key={result.code} result={result} compact jobNo={getJobNo(result.code)} showButton={false} />
+            <TypeCard key={result.code} result={result} compact showButton={false} />
           ))}
         </div>
 
