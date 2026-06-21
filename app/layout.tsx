@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     title: "ラブクエ診断",
     description: siteConfig.description,
     images: [siteConfig.defaultOgImage]
+  },
+  verification: {
+    google: "QeqUGUsDLKwIfSIaHDUB80eIPQpQwKCakMMg056Yhjw"
   }
 };
 
