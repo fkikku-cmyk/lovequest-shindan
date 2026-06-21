@@ -4,6 +4,7 @@ import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
 import PixelButton from "@/components/PixelButton";
 import SectionCard from "@/components/SectionCard";
+import ShareButtons from "@/components/ShareButtons";
 import TypeCard from "@/components/TypeCard";
 import { results } from "@/data/results";
 import { createPageMetadata } from "@/lib/seo";
@@ -74,6 +75,8 @@ export default function Home() {
           <p className="text-center text-sm font-bold leading-7 text-slate-500">
             5段階で答えるだけ。途中保存にも対応しています。
           </p>
+
+          <ShareButtons />
         </div>
       </SectionCard>
 

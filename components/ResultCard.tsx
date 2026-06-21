@@ -8,37 +8,13 @@ import ResultImageCard from "@/components/ResultImageCard";
 import SectionCard from "@/components/SectionCard";
 import StatsStars from "@/components/StatsStars";
 import { getCompatibilityReason, results, type DiagnosisResult } from "@/data/results";
+import { buildThreadsShareUrl, buildXShareUrl, getCanonicalCurrentUrl } from "@/lib/share";
 
 type ResultCardProps = {
   result: DiagnosisResult;
 };
 
 const DEFAULT_OG_IMAGE = "/ogp/default-ogp.png";
-
-function getCurrentShareUrl(code: string) {
-  if (typeof window === "undefined") {
-    return `/result/${code}`;
-  }
-
-  return window.location.href;
-}
-
-function buildXShareUrl(text: string, url: string) {
-  const params = new URLSearchParams({
-    text,
-    url
-  });
-
-  return `https://twitter.com/intent/tweet?${params.toString()}`;
-}
-
-function buildThreadsShareUrl(text: string, url: string) {
-  const params = new URLSearchParams({
-    text: `${text}\n${url}`
-  });
-
-  return `https://www.threads.net/intent/post?${params.toString()}`;
-}
 
 export default function ResultCard({ result }: ResultCardProps) {
   const [copied, setCopied] = useState(false);
@@ -54,7 +30,7 @@ export default function ResultCard({ result }: ResultCardProps) {
 
   const handleCopy = async () => {
     if (typeof navigator === "undefined") return;
-    const currentShareUrl = getCurrentShareUrl(result.code);
+    const currentShareUrl = getCanonicalCurrentUrl();
     await navigator.clipboard.writeText(currentShareUrl);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
@@ -63,7 +39,7 @@ export default function ResultCard({ result }: ResultCardProps) {
   const handleXShare = () => {
     if (typeof window === "undefined") return;
 
-    const currentShareUrl = getCurrentShareUrl(result.code);
+    const currentShareUrl = getCanonicalCurrentUrl();
     window.open(
       buildXShareUrl(shareText, currentShareUrl),
       "_blank",
@@ -74,7 +50,7 @@ export default function ResultCard({ result }: ResultCardProps) {
   const handleThreadsShare = () => {
     if (typeof window === "undefined") return;
 
-    const currentShareUrl = getCurrentShareUrl(result.code);
+    const currentShareUrl = getCanonicalCurrentUrl();
     window.open(
       buildThreadsShareUrl(shareText, currentShareUrl),
       "_blank",
@@ -85,7 +61,7 @@ export default function ResultCard({ result }: ResultCardProps) {
   const handleImageShare = async () => {
     if (typeof window === "undefined" || typeof navigator === "undefined") return;
 
-    const currentShareUrl = getCurrentShareUrl(result.code);
+    const currentShareUrl = getCanonicalCurrentUrl();
 
     const shareData = {
       title: shareTitle,

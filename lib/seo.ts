@@ -7,6 +7,7 @@ export const siteConfig = {
   defaultOgImage: "/ogp/default-ogp.png"
 };
 
+const defaultSiteUrl = "https://lovequest-shindan.vercel.app";
 const blockedTemplateHost = `${["next", "js", "react", "typescript", "tailwind", "css"].join("-")}.vercel.app`;
 
 export function getSiteUrl() {
@@ -15,12 +16,7 @@ export function getSiteUrl() {
     return configuredUrl;
   }
 
-  const vercelUrl = normalizeSiteUrl(process.env.VERCEL_URL);
-  if (vercelUrl) {
-    return vercelUrl;
-  }
-
-  return "http://127.0.0.1:3000";
+  return defaultSiteUrl;
 }
 
 export function absoluteUrl(path = "/") {
