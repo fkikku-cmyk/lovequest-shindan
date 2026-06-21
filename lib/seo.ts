@@ -2,21 +2,19 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "ラブクエ診断",
+  url: "https://lovequest-shindan.vercel.app",
   description:
-    "24問であなたの恋愛ジョブがわかる、現代RPG風の無料16タイプ恋愛診断サイトです。",
+    "ラブクエ診断は、24問で恋愛タイプがわかる無料の恋愛診断サイトです。16タイプの恋愛ジョブで、あなたの恋愛傾向を現代RPG風に楽しく診断できます。",
   defaultOgImage: "/ogp/default-ogp.png"
 };
 
-const defaultSiteUrl = "https://lovequest-shindan.vercel.app";
-const blockedTemplateHost = `${["next", "js", "react", "typescript", "tailwind", "css"].join("-")}.vercel.app`;
-
 export function getSiteUrl() {
   const configuredUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
-  if (configuredUrl) {
+  if (configuredUrl && configuredUrl === siteConfig.url) {
     return configuredUrl;
   }
 
-  return defaultSiteUrl;
+  return siteConfig.url;
 }
 
 export function absoluteUrl(path = "/") {
@@ -33,10 +31,6 @@ function normalizeSiteUrl(value?: string) {
 
   try {
     const url = new URL(withProtocol);
-    if (url.hostname === blockedTemplateHost) {
-      return null;
-    }
-
     return url.origin.replace(/\/$/, "");
   } catch {
     return null;
@@ -62,16 +56,16 @@ export function createPageMetadata({
     title,
     description,
     alternates: {
-      canonical: path
+      canonical: absoluteUrl(path)
     },
     openGraph: {
       title,
       description,
-      url: path,
+      url: absoluteUrl(path),
       siteName: siteConfig.name,
       images: [
         {
-          url: image,
+          url: absoluteUrl(image),
           width: 1200,
           height: 630,
           alt: `${siteConfig.name}のOGP画像`
@@ -84,7 +78,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [image]
+      images: [absoluteUrl(image)]
     }
   };
 }

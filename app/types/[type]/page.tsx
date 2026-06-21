@@ -9,6 +9,7 @@ import StatsStars from "@/components/StatsStars";
 import { getCompatibilityReason, resultSupplements, results } from "@/data/results";
 import type { TypeCode } from "@/lib/diagnose";
 import { resolveOgImage } from "@/lib/ogp";
+import { absoluteUrl } from "@/lib/seo";
 
 type TypePageProps = {
   params: {
@@ -39,8 +40,10 @@ export function generateMetadata({ params }: TypePageProps): Metadata {
 
   const ogImageUrl = resolveOgImage(result.ogImage);
   const detailUrl = `/types/${result.code}`;
-  const title = `${result.name}（${result.code}）｜ラブクエ診断 役職図鑑`;
-  const description = `ラブクエ診断の恋愛タイプ「${result.name}」の特徴、恋愛傾向、強み、弱み、相性を紹介します。`;
+  const absoluteDetailUrl = absoluteUrl(detailUrl);
+  const absoluteOgImageUrl = absoluteUrl(ogImageUrl);
+  const title = `${result.name}｜ラブクエ診断 役職図鑑`;
+  const description = `ラブクエ診断の恋愛タイプ『${result.name}』の特徴、相性、恋愛傾向を紹介します。`;
 
   return {
     title: {
@@ -48,19 +51,19 @@ export function generateMetadata({ params }: TypePageProps): Metadata {
     },
     description,
     alternates: {
-      canonical: detailUrl
+      canonical: absoluteDetailUrl
     },
     openGraph: {
       title,
       description,
-      url: detailUrl,
+      url: absoluteDetailUrl,
       siteName: "ラブクエ診断",
       images: [
         {
-          url: ogImageUrl,
+          url: absoluteOgImageUrl,
           width: 1200,
           height: 630,
-          alt: `${result.name}（${result.code}）の役職図鑑カード`
+          alt: `${result.name}の役職図鑑カード`
         }
       ],
       type: "article",
@@ -70,7 +73,7 @@ export function generateMetadata({ params }: TypePageProps): Metadata {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImageUrl]
+      images: [absoluteOgImageUrl]
     }
   };
 }

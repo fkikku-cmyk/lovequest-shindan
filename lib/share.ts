@@ -1,6 +1,8 @@
 const DEFAULT_SITE_URL = "https://lovequest-shindan.vercel.app";
 
-export const SITE_URL = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL) ?? DEFAULT_SITE_URL;
+const configuredSiteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
+
+export const SITE_URL = configuredSiteUrl === DEFAULT_SITE_URL ? configuredSiteUrl : DEFAULT_SITE_URL;
 
 export function getCanonicalCurrentUrl() {
   if (typeof window === "undefined") {

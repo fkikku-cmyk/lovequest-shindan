@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { siteConfig, getSiteUrl } from "@/lib/seo";
+import { siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL("https://lovequest-shindan.vercel.app"),
   title: {
-    default: "ラブクエ診断 | 恋愛をRPGの冒険にたとえる16タイプ診断",
+    default: "ラブクエ診断 | 24問で恋愛タイプがわかる無料RPGジョブ診断",
     template: "%s | ラブクエ診断"
   },
   description: siteConfig.description,
@@ -21,19 +20,20 @@ export const metadata: Metadata = {
     "恋愛診断",
     "16タイプ診断",
     "恋愛タイプ診断",
+    "RPGジョブ診断",
     "現代RPG風診断",
     "恋愛ジョブ"
   ],
   alternates: {
-    canonical: "/"
+    canonical: "https://lovequest-shindan.vercel.app/"
   },
   openGraph: {
-    title: "ラブクエ診断",
+    title: "ラブクエ診断 | 24問で恋愛タイプがわかる無料RPGジョブ診断",
     description: siteConfig.description,
-    url: "/",
+    url: "https://lovequest-shindan.vercel.app/",
     images: [
       {
-        url: siteConfig.defaultOgImage,
+        url: "https://lovequest-shindan.vercel.app/ogp/default-ogp.png",
         width: 1200,
         height: 630,
         alt: "ラブクエ診断 OGP画像"
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ラブクエ診断",
+    title: "ラブクエ診断 | 24問で恋愛タイプがわかる無料RPGジョブ診断",
     description: siteConfig.description,
-    images: [siteConfig.defaultOgImage]
+    images: ["https://lovequest-shindan.vercel.app/ogp/default-ogp.png"]
   },
   verification: {
     google: "QeqUGUsDLKwIfSIaHDUB80eIPQpQwKCakMMg056Yhjw"

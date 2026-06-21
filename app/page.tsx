@@ -10,16 +10,16 @@ import { results } from "@/data/results";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "無料の16タイプ恋愛ジョブ診断",
+  title: "ラブクエ診断 | 無料の16タイプ恋愛ジョブ診断",
   description:
-    "24問であなたの恋愛ジョブがわかる無料診断。現代RPG風の16タイプで恋愛傾向を楽しくチェックできます。",
+    "ラブクエ診断は、24問で恋愛タイプがわかる無料の恋愛診断です。16タイプの恋愛ジョブ診断で、あなたの恋愛傾向を現代RPG風に楽しくチェックできます。",
   path: "/"
 });
 
 const features = [
   {
     title: "24問でわかる",
-    text: "直感で5段階回答。すきま時間にあなたの恋愛ジョブを診断できます。"
+    text: "直感で5段階回答。すきま時間に恋愛タイプ診断を楽しめます。"
   },
   {
     title: "16タイプに分類",
@@ -27,7 +27,7 @@ const features = [
   },
   {
     title: "RPG風ジョブで楽しく",
-    text: "勇者、白魔道士、司書、月影巫女など、結果は物語みたいに読めます。"
+    text: "勇者、白魔道士、司書、月影巫女など、RPGジョブ診断として結果を物語みたいに読めます。"
   },
   {
     title: "SNSで共有できる",
@@ -43,7 +43,9 @@ export default function Home() {
       <SectionCard className="overflow-hidden p-4 sm:p-7">
         <div className="space-y-5">
           <div>
-            <h1 className="sr-only">ラブクエ診断</h1>
+            <h1 className="text-center text-3xl font-black text-slate-950 sm:text-4xl">
+              ラブクエ診断
+            </h1>
             <div className="mt-4 overflow-hidden rounded-3xl bg-[#f8d3c4] ring-1 ring-pink-100">
               <Image
                 src="/lovequest-logo.jpg"
@@ -59,7 +61,7 @@ export default function Home() {
               あなたの恋は、どんな冒険タイプ？
             </p>
             <p className="mt-3 text-base leading-8 text-slate-600">
-              24問に答えるだけで、あなたの恋愛タイプをRPG風ジョブで診断。結果はURLで保存・共有できます。
+              ラブクエ診断は、24問に答えるだけであなたの恋愛タイプがわかる無料の恋愛診断です。16タイプの恋愛ジョブ診断として、恋愛傾向を楽しくチェックできます。
             </p>
           </div>
 

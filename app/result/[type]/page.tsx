@@ -6,6 +6,7 @@ import ResultCard from "@/components/ResultCard";
 import { results } from "@/data/results";
 import type { TypeCode } from "@/lib/diagnose";
 import { resolveOgImage } from "@/lib/ogp";
+import { absoluteUrl } from "@/lib/seo";
 
 type ResultPageProps = {
   params: {
@@ -36,6 +37,8 @@ export function generateMetadata({ params }: ResultPageProps): Metadata {
 
   const resultUrl = `/result/${result.code}`;
   const ogImageUrl = resolveOgImage(result.ogImage);
+  const absoluteResultUrl = absoluteUrl(resultUrl);
+  const absoluteOgImageUrl = absoluteUrl(ogImageUrl);
   const title = `${result.name}（${result.code}）｜ラブクエ診断`;
   const description = `私の恋愛ジョブは『${result.name}』でした。${result.catch} あなたもラブクエ診断で恋のタイプを診断してみよう！`;
 
@@ -45,16 +48,16 @@ export function generateMetadata({ params }: ResultPageProps): Metadata {
     },
     description,
     alternates: {
-      canonical: resultUrl
+      canonical: absoluteResultUrl
     },
     openGraph: {
       title,
       description,
-      url: resultUrl,
+      url: absoluteResultUrl,
       siteName: "ラブクエ診断",
       images: [
         {
-          url: ogImageUrl,
+          url: absoluteOgImageUrl,
           width: 1200,
           height: 630,
           alt: `${result.name}の診断結果画像`
@@ -67,7 +70,7 @@ export function generateMetadata({ params }: ResultPageProps): Metadata {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImageUrl]
+      images: [absoluteOgImageUrl]
     }
   };
 }
